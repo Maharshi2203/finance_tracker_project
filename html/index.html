@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Tracker</title>
+    <link rel="stylesheet" href="Finance_Tracker.css">
+    <script src="Finance_tracker.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <div class="app-header">
+            <h1>Finance Tracker</h1>
+        </div>
+        
+        <div class="app-body">
+            <div class="sidebar">
+                <div class="menu-option active" onclick="showPanel('dashboard')">
+                    <i>📊</i> Dashboard
+                </div>
+                <div class="menu-option" onclick="showPanel('add-transaction')">
+                    <i>➕</i> Add Transaction
+                </div>
+                <div class="menu-option" onclick="showPanel('transactions')">
+                    <i>📋</i> Transactions
+                </div>
+                <div class="menu-option" onclick="showPanel('scheduled')">
+                    <i>⏰</i> Scheduled
+                </div>
+                <div class="menu-option" onclick="undoTransaction()">
+                    <i>↩️</i> Undo Last
+                </div>
+            </div>
+            
+            <div class="content-area">
+             
+                <div id="dashboard" class="panel active">
+                    <h2 class="panel-title">Dashboard</h2>
+                    
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <div>Total Income</div>
+                            <div class="stat-value income" id="total-income">₹0.00</div>
+                        </div>
+                        <div class="stat-card">
+                            <div>Total Expenses</div>
+                            <div class="stat-value expense" id="total-expense">₹0.00</div>
+                        </div>
+                        <div class="stat-card">
+                            <div>Balance</div>
+                            <div class="stat-value balance" id="total-balance">₹0.00</div>
+                        </div>
+                    </div>
+                    
+                    <h3>Recent Transactions</h3>
+                    <table id="recent-transactions">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                       
+                        </tbody>
+                    </table>
+                </div>
+                
+
+                <div id="add-transaction" class="panel">
+                    <h2 class="panel-title">Add Transaction</h2>
+                    
+                    <div class="form-group">
+                        <label for="type">Transaction Type</label>
+                        <select id="type" class="form-control">
+                            <option value="Income">Income</option>
+                            <option value="Expense">Expense</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <input type="text" id="category" class="form-control" placeholder="e.g., Salary, Groceries">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="amount">Amount (₹)</label>
+                        <input type="number" id="amount" class="form-control" step="0.01" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" id="date" class="form-control">
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="addTransaction()">Add Transaction</button>
+                    <button class="btn btn-secondary" onclick="showPanel('dashboard')">Cancel</button>
+                </div>
+                
+                <!-- Transactions Panel -->
+                <div id="transactions" class="panel">
+                    <h2 class="panel-title">All Transactions</h2>
+                    
+                    <table id="transactions-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- All transactions will be added here -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Scheduled Transactions Panel -->
+                <div id="scheduled" class="panel">
+                    <h2 class="panel-title">Scheduled Transactions</h2>
+                    
+                    <div class="form-group">
+                        <label for="scheduled-type">Transaction Type</label>
+                        <select id="scheduled-type" class="form-control">
+                            <option value="Income">Income</option>
+                            <option value="Expense">Expense</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="scheduled-category">Category</label>
+                        <input type="text" id="scheduled-category" class="form-control" placeholder="e.g., Salary, Rent">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="scheduled-amount">Amount (₹)</label>
+                        <input type="number" id="scheduled-amount" class="form-control" step="0.01" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="scheduled-date">Scheduled Date</label>
+                        <input type="date" id="scheduled-date" class="form-control">
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="addScheduledTransaction()">Schedule Transaction</button>
+                    
+                    <h3 style="margin-top: 30px;">Upcoming Scheduled Transactions</h3>
+                    <table id="scheduled-transactions-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Scheduled transactions will be added here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="notification" class="notification"></div>
+
+  
+</body>
+</html>
